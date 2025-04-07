@@ -23,10 +23,10 @@ public class LinkedList<T> {
     }
 
     // MAKENULL - создание пустого списка
-    public void makeNull() {
-        head = null;
-        size = 0;
-    }
+//    public void makeNull() {
+//        head = null;
+//        size = 0;
+//    }
 
     // INS - вставка элемента x в позицию p
     public void insert(T x, int p) {
@@ -66,37 +66,37 @@ public class LinkedList<T> {
     }
 
     // DEL - удаление элемента из позиции p
-    public void delete(int p) {
-        if (p < 0 || p >= size) {
-            System.out.println("Неверная позиция для удаления");
-            return;
-        }
-
-        if (p == 0) {
-            head = head.next;
-        } else {
-            Node<T> prev = head;
-            for (int i = 0; i < p - 1; i++) {
-                prev = prev.next;
-            }
-            prev.next = prev.next.next;
-        }
-        size--;
-    }
+//    public void delete(int p) {
+//        if (p < 0 || p >= size) {
+//            System.out.println("Неверная позиция для удаления");
+//            return;
+//        }
+//
+//        if (p == 0) {
+//            head = head.next;
+//        } else {
+//            Node<T> prev = head;
+//            for (int i = 0; i < p - 1; i++) {
+//                prev = prev.next;
+//            }
+//            prev.next = prev.next.next;
+//        }
+//        size--;
+//    }
 
     // LOCATE - возврат позиции элемента x
-    public int locate(T x) {
-        Node<T> current = head;
-        int pos = 0;
-        while (current != null) {
-            if (current.data.equals(x)) {
-                return pos;
-            }
-            current = current.next;
-            pos++;
-        }
-        return -1; // Элемент не найден
-    }
+//    public int locate(T x) {
+//        Node<T> current = head;
+//        int pos = 0;
+//        while (current != null) {
+//            if (current.data.equals(x)) {
+//                return pos;
+//            }
+//            current = current.next;
+//            pos++;
+//        }
+//        return -1; // Элемент не найден
+//    }
 
     // NEXT - возврат позиции следующего элемента после p
     public int next(int p) {
@@ -107,12 +107,12 @@ public class LinkedList<T> {
     }
 
     // PREV - возврат позиции предыдущего элемента перед p
-    public int previous(int p) {
-        if (p <= 0 || p >= size) {
-            return -1; // Нет предыдущего элемента
-        }
-        return p - 1;
-    }
+//    public int previous(int p) {
+//        if (p <= 0 || p >= size) {
+//            return -1; // Нет предыдущего элемента
+//        }
+//        return p - 1;
+//    }
 
     // FIRST - возврат позиции первого элемента
     public int first() {
@@ -120,24 +120,30 @@ public class LinkedList<T> {
     }
 
     // LAST - возврат позиции последнего элемента
-    public int last() {
-        return size - 1;
-    }
+//    public int last() {
+//        return size - 1;
+//    }
 
-    // Поиск всех вхождений элемента
+    // Поиск всех вхождений элемента с использованием операторов
     public void findOccurrences(T x) {
         List<Integer> positions = new ArrayList<>();
-        Node<T> current = head;
-        int pos = 0;
         int count = 0;
 
-        while (current != null) {
-            if (current.data.equals(x)) {
+        // Начинаем с первого элемента
+        int currentPos = first();
+
+        while (currentPos != -1) {
+            // Получаем элемент в текущей позиции
+            T currentElement = retrieve(currentPos);
+
+            // Сравниваем с искомым элементом
+            if (currentElement != null && currentElement.equals(x)) {
                 count++;
-                positions.add(pos);
+                positions.add(currentPos);
             }
-            current = current.next;
-            pos++;
+
+            // Переходим к следующей позиции
+            currentPos = next(currentPos);
         }
 
         System.out.println("Элемент " + x + " встречается " + count + " раз(а)");
@@ -152,10 +158,10 @@ public class LinkedList<T> {
 
     // Печать списка
     public void print() {
-        Node<T> current = head;
-        while (current != null) {
-            System.out.print(current.data + " ");
-            current = current.next;
+        int currentPos = first();
+        while (currentPos != -1) {
+            System.out.print(retrieve(currentPos) + " ");
+            currentPos = next(currentPos);
         }
         System.out.println();
     }
@@ -174,13 +180,13 @@ public class LinkedList<T> {
         System.out.print("Список: ");
         list.print();
 
-        // Поиск вхождений числа 10
+        // Поиск вхождений числа 10 с использованием операторов
         list.findOccurrences(10);
 
         // Пример использования других методов
-        System.out.println("Первый элемент: " + list.retrieve(list.first()));
-        System.out.println("Последний элемент: " + list.retrieve(list.last()));
-        System.out.println("Следующий после позиции 2: " + list.retrieve(list.next(2)));
-        System.out.println("Предыдущий перед позицией 2: " + list.retrieve(list.previous(2)));
+//        System.out.println("Первый элемент: " + list.retrieve(list.first()));
+//        System.out.println("Последний элемент: " + list.retrieve(list.last()));
+//        System.out.println("Следующий после позиции 2: " + list.retrieve(list.next(2)));
+//        System.out.println("Предыдущий перед позицией 2: " + list.retrieve(list.previous(2)));
     }
 }
